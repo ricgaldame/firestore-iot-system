@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>e-things</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/x-icon" href="static/images/iot-icon.png">
+		<link rel="stylesheet" href="static/bootstrap-4.0.0/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="static/fontawesome-free-5.8.2-web/css/all.css">
+		<link rel="stylesheet" href="static/css/main.css">
+		<!-- start firebase initialization  -->
+		<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+		<!-- end firebase initialization  -->
+
+
+		<link rel="apple-touch-icon" sizes="167x167" href="static/images/icon/Icon-167.png">
+        <link rel="apple-touch-icon" sizes="29x29" href="static/images/icon/Icon-29.png">
+        <link rel="apple-touch-icon" sizes="32x32" href="static/images/icon/Icon-32.png">
+        <link rel="apple-touch-icon" sizes="40x40" href="static/images/icon/Icon-40.png">
+        <link rel="apple-touch-icon" sizes="20x20" href="static/images/icon/Icon-20.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="static/images/icon/Icon-114.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="static/images/icon/Icon-57.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="static/images/icon/Icon-144.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="static/images/icon/Icon-72.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="static/images/icon/Icon-60.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="static/images/icon/Icon-76.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="static/images/icon/Icon-120.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="static/images/icon/Icon-152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="static/images/icon/Icon-180.png">
+        <link rel="apple-touch-icon" sizes="48x48" href="static/images/icon/Icon-48.png">
+        <meta name="apple-mobile-web-app-title" content="e-things">
+        <meta name="application-name" content="e-things">
+
+	</head>
+	<body>
+		<script src="static/jquery/jquery-3.1.1.min.js"></script>
+		<script src="static/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+		<script src="static/jquery/login.js"></script>
+		<script src="static/jquery/navbar.js"></script>
+		<script src="static/jquery/session.js"></script>
+
+		<script type="text/javascript">
+			$("#mobile-button-nav").addEventListener("click", function(e){
+				$("#mobile-nav").classList.toggle("show");
+			});
+		</script>
+		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #eeeeee;margin-top: -5px;z-index: 1;" id="navbar"></nav>
+
+		<div class="container" style="min-height: 100%;background-color: rgba(255, 255, 255, 0.8);box-shadow: 0 0 15px 5px rgba(31, 73, 125, 0.8);padding-top: 55px;">
+			<div class="row">
+				<div class="col-lg-12" id="edit_system_div"></div>
+				<div class="col-lg-12" id="session_ok"></div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-labelledby="title_modal_edit" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="title_modal_edit">Editar Subsistema</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+				</div>
+				<div class="modal-body" id="content_edit"></div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal fade" id="modal_add_subsystem" tabindex="-1" role="dialog" aria-labelledby="title_modal_add_subsystem" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_modal_add_subsystem">Agregar Elemento</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_add_subsystem"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="add_subsystem">Agregar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_add_system" tabindex="-1" role="dialog" aria-labelledby="title_modal_add_system" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_modal_add_system">Agregar Subsistema</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_add_system"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="add_new_system_accept">Agregar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="modal_delete_system" tabindex="-1" role="dialog" aria-labelledby="title_modal_delete_system" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_modal_delete_system">Eliminar Subsistema</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_delete_system"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="delete_system">Eliminar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_delete_subsystem" tabindex="-1" role="dialog" aria-labelledby="title_modal_delete_subsystem" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_modal_delete_subsystem">Eliminar Elemento</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_delete_subsystem"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="delete_subsystem">Eliminar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_edit_subsubsystem" tabindex="-1" role="dialog" aria-labelledby="title_modal_edit_subsubsystem" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_modal_edit_subsubsystem">Editar Elemento</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row" id="content_edit_subsubsystem"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="edit_subsubsystem">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_delete_principal_system" tabindex="-1" role="dialog" aria-labelledby="title_delete_principal_system" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_delete_principal_system">Eliminar Sistema</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_delete_principal_system"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="delete_principal_system">Eliminar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_admin_users" tabindex="-1" role="dialog" aria-labelledby="title_admin_users" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_admin_users">Administrar Usuarios</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_admin_users"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_delete_users" tabindex="-1" role="dialog" aria-labelledby="title_delete_users" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_delete_users">Eliminar Usuario</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_delete_users"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="delete_users_button">Eliminar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_edit_users" tabindex="-1" role="dialog" aria-labelledby="title_edit_users" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_delete_users">Editar Usuario</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_edit_users"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="edit_users_button">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_add_users" tabindex="-1" role="dialog" aria-labelledby="title_add_users" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_add_users">Agregar Usuario</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_add_users"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="add_new_users_button">Agregar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_set_raspberry" tabindex="-1" role="dialog" aria-labelledby="title_set_raspberry" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_set_raspberry">Configurar Gateway</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_set_raspberry"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_set_raspberry">Cerrar</button>
+						<!-- <button type="button" class="btn btn-primary" data-dismiss="modal" id="add_new_users_button">Configurar</button> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_add_edit_raspberry" tabindex="-1" role="dialog" aria-labelledby="title_add_edit_raspberry" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_add_edit_raspberry">Agregar Gateway</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_add_edit_raspberry"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="add_edit_raspberry_button">Agregar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal_delete_raspberry" tabindex="-1" role="dialog" aria-labelledby="title_delete_raspberry" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="title_delete_raspberry">Eliminar Gateway</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="content_delete_raspberry"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="delete_raspberry_button">Eliminar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

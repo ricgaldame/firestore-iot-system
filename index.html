@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>e-things</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" type="image/x-icon" href="static/images/iot-icon.png">
+		<link rel="stylesheet" href="static/bootstrap-4.0.0/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="static/fontawesome-free-5.8.2-web/css/all.css">
+		<link rel="stylesheet" href="static/css/main.css">
+		<!-- start firebase initialization  -->
+		<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+		<!-- end firebase initialization  -->
+	</head>
+	<body>
+		<script src="static/jquery/jquery-3.1.1.min.js"></script>
+		<script src="static/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+		<script src="static/jquery/login.js"></script>
+		<script src="static/jquery/navbar.js"></script>
+
+		<script type="text/javascript">
+			$("#mobile-button-nav").addEventListener("click", function(e){
+				$("#mobile-nav").classList.toggle("show");
+			});
+		</script>
+
+		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #eeeeee;margin-top: -5px;z-index: 1;" id="navbar"></nav>
+
+		<div class="container" style="min-height: 100%;background-color: rgba(255, 255, 255, 0.8);box-shadow: 0 0 15px 5px rgba(31, 73, 125, 0.8);padding-top: 55px;">
+			<div>
+				<h3>Conéctate</h3>
+				<p>Si deseas realizar tus propios proyectos IoT, te brindamos las herramientas y el soporte necesarios para que lo puedas lograr.</p>
+				<h3>Regístrate</h3>
+				<p>Para comenzar debes crear una cuenta en nuestro sitio y acceder a las herramientas que te facilitamos. Presiona <strong> <i class="fas fa-user" style="font-size: 15px;"></i><i class="fas fa-sign-in-alt" style="font-size: 15px;"></i></strong> en la barra del navegador y luego presiona el botón <strong>Registrarse</strong></p>
+				<h3> <i class="fas fa-play" style="font-size: 20px;"></i> Inténtalo</h3>
+				<p>Presiona el botón <i class="fas fa-play" style="font-size: 13px;"></i> en la barra de navegación y sigue las instrucciones que te daremos:</p>
+
+          		<table class="table table-responsive table-hover" style="margin-bottom: 0px;">
+	              <tr>
+	                <td><i class="fas fa-play"></i></td>
+	                <td colspan="2">Iténtalo</td>
+	              </tr>
+	              <tr>
+	                <td></td>
+	                <td><i class="fas fa-project-diagram"></i></td>
+	                <td>Crear Nuevo Sistema</td>
+	              </tr>
+	              <tr>
+	                <td></td>
+	                <td><i class="fas fa-project-diagram"></i></td>
+	                <td>Ingresa a Sistema</td>
+	              </tr>
+<!-- 	              <tr>
+	                <td></td>
+	                <td><img src="static/images/subsystem.png" width="20" height="20"></td>
+	                <td>Crear Nuevo Subsistema</td>
+	              </tr>
+	              <tr>
+	                <td></td>
+	                <td><img src="static/images/element.png" width="20" height="20"></td>
+	                <td>Crear Nuevo Elemento</td>
+	              </tr> -->
+	              <tr>
+	                <td></td>
+	                <td><i class="fab fa-raspberry-pi"></i></td>
+	                <td>Configurar Gateway</td>
+	              </tr>
+	              <tr>
+	                <td></td>
+	                <td><i class="fas fa-code-branch"></i></td>
+	                <td>Configurar Xbee</td>
+	              </tr>
+	            </table>
+
+			</div>
+		</div>
+	</body>
+</html>

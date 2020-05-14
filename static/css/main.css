@@ -1,0 +1,86 @@
+body { 
+    margin-bottom: 0px;
+    margin-top: 0px;
+    line-height: 0;
+
+    background: url(../images/iot3.jpg) no-repeat center center fixed;
+	background-position: top;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-attachment: fixed;
+
+    /*width: 100%;*/
+    /*margin: 0 auto;*/
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+
+div {
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.navbar-nav li a {
+    line-height: 20px;
+}
+
+.navbar {
+    /*list-style: none;*/
+    width: 100%;
+    position:fixed;
+    /*right:50%;*/
+    /*margin-right:155px;*/
+    margin-top:0%;
+ }
+
+ p {
+    font-size: 18px;
+    line-height: 30px;
+    text-align: justify;
+    display: inline;
+ }
+
+ h3 {
+    padding-top: 2%;
+ }
+
+ h5 {
+    font-size: 16px;
+ }
+
+ h6 {
+    font-size: 14px;
+ }
+
+.table td,
+.table th {
+    border: 0;
+    vertical-align: middle;
+    padding: .5rem;
+}
+
+.table td, .table th {
+    border-top: 0px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 0;
+}
+
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0 rgba(0,123,255,.25);
+}
+
+tr:hover {
+    background-color: #ffa;
+    background: transparent !important;
+}
+tr:hover td {
+    background: transparent !important;
+}
